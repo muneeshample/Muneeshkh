@@ -1,0 +1,7 @@
+#!/bin/bash
+
+loggedInUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+
+sudo -u $loggedInUser /usr/bin/defaults write /Users/$loggedInUser/Library/Preferences/com.apple.Dock contents-immutable -bool true; killall Dock
+
+exit 0
